@@ -1,6 +1,7 @@
 import logging
 from dataclasses import dataclass
 from typing import Optional, Tuple
+import gettext
 
 import dataset
 from telegram import Message
@@ -11,6 +12,7 @@ from .config import DB_URI, TOKEN
 
 logging.basicConfig()
 
+_ = gettext.gettext
 
 @dataclass(frozen=True)
 class MessageInfo:
@@ -155,16 +157,16 @@ def opt_in(_, update):
     db = dataset.connect(DB_URI)
 
     if is_tracked(chat_id, user_id, db):
-        message.reply_text(u'You are already being tracked in this chat \U0001F600')
+        message.reply_text(_(u'You are already being tracked in this chat \U0001F600'))
         return
 
     track(chat_id, user_id, True, db)
 
     message.reply_text(
-        u'You are now being tracked in this chat. '
+        _(u'You are now being tracked in this chat. '
         'Worry not, the contents of your messages are not saved, '
         'only their length \U00002713'
-    )
+    ))
 
 
 def opt_out(_, update):
@@ -175,12 +177,12 @@ def opt_out(_, update):
     db = dataset.connect(DB_URI)
 
     if not is_tracked(chat_id, user_id, db):
-        message.reply_text(u'You are not being tracked in this chat \U0001F914')
+        message.reply_text(_(u'You are not being tracked in this chat \U0001F914'))
         return
 
     track(chat_id, user_id, False, db)
 
-    message.reply_text(u'You are no longer being tracked in this chat \U0001F64B')
+    message.reply_text(_(u'You are no longer being tracked in this chat \U0001F64B'))
 
 def run():
     updater = Updater(TOKEN)

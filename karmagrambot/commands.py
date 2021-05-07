@@ -36,14 +36,15 @@ def karma(_: Bot, update: Update):
     message = update.message
     text = message.text
 
-    _, *args = text.split()
+    cmd, *args = text.split()
 
     username = None
-    period = get_period('m')
+    period = get_period(_('m'))
     if args:
+        periods = [_('w'), _('week'), _('y'), _('year'), _('all'), _('alltime')]
         for arg in args:
             arg = arg.lstrip('-')
-            if arg in ('w', 'week', 'y', 'year', 'all', 'alltime'):
+            if arg in periods:
                 period = get_period(arg)
             elif arg != 'm':
                 username = arg.lstrip('@')
@@ -55,13 +56,13 @@ def karma(_: Bot, update: Update):
     )
 
     if user_info is None:
-        message.reply_text(f'Could not find user named {username}')
+        message.reply_text(_(f'Could not find user named {username}'))
         return
 
     user_karma = analytics.get_karma(user_info.user_id, message.chat_id, period)
 
-    period_suffix = f'(since {period})' if period is not None else f'(all time)'
-    message.reply_text(f'{user_info.username} has {user_karma} karma in this chat {period_suffix}.')
+    period_suffix = _(f'(since {period})' if period is not None else f'(all time)')
+    message.reply_text(_(f'{user_info.username} has {user_karma} karma in this chat {period_suffix}.'))
 
 
 def karmas(_: Bot, update: Update):
@@ -78,8 +79,9 @@ def karmas(_: Bot, update: Update):
     _, *args = text.split()
     arg = args[0] if args else 'm'
     requested_period = arg.lstrip('-')
-    if requested_period not in ('m', 'month', 'w', 'week', 'y', 'year', 'all', 'alltime'):
-        update.message.reply_text(f'Period {requested_period} is not supported.')
+    periods = [_('m'), _('month'), _('w'), _('week'), _('y'), _('year'), _('all'), _('alltime')]
+    if requested_period not in periods:
+        update.message.reply_text(_(f'Period {requested_period} is not supported.'))
         return
 
     period = get_period(arg)
@@ -101,7 +103,7 @@ def devil(_: Bot, update: Update):
         update: The object that represents an incoming update for the bot to handle.
     """
     group_devil = analytics.get_devil_saint(update.message.chat.id).devil
-    response = f"{group_devil.name}, there's a special place in hell for you, see you there."
+    response = _(f"{group_devil.name}, there's a special place in hell for you, see you there.")
 
     update.message.reply_text(response)
 
@@ -114,7 +116,7 @@ def saint(_: Bot, update: Update):
         update: The object that represents an incoming update for the bot to handle.
     """
     group_saint = analytics.get_devil_saint(update.message.chat.id).saint
-    response = f"{group_saint.name}, apparently you're the nicest person here. I don't like you."
+    response = _(f"{group_saint.name}, apparently you're the nicest person here. I don't like you.")
 
     update.message.reply_text(response)
 

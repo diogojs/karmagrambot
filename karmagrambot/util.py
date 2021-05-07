@@ -58,15 +58,15 @@ def user_info_from_username(db, username) -> Optional[UserInfo]:
 
 def get_period(arg_period: str) -> Optional[date]:
     today = date.today()
-    if arg_period in ('m', 'month'):
+    if arg_period in (_('m'), _('month')):
         timestamp = today.replace(day=1)
-    elif arg_period in ('y', 'year'):
+    elif arg_period in (_('y'), _('year')):
         timestamp = today.replace(day=1, month=1)
-    elif arg_period in ('w', 'week'):
+    elif arg_period in (_('w'), _('week')):
         last_month = today.month
         days_last_month = monthrange(today.year, today.month)[1]
         timestamp = today.replace(day=(today.day-7)%days_last_month, month=last_month)
     else:
         return None
-    
+
     return timestamp
