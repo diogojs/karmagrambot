@@ -8,7 +8,7 @@ from .config import DB_URI
 from .util import get_period, user_info_from_message_or_reply, user_info_from_username
 
 
-def average_length(_: Bot, update: Update):
+def average_length(bot: Bot, update: Update):
     """Reply the user who invoked the command with hers/his average message length.
 
     Args:
@@ -24,7 +24,7 @@ def average_length(_: Bot, update: Update):
     update.message.reply_text(response)
 
 
-def karma(_: Bot, update: Update):
+def karma(bot: Bot, update: Update):
     """Reply the user who invoked the command with hers/his respective karma.
 
     Args:
@@ -65,7 +65,7 @@ def karma(_: Bot, update: Update):
     message.reply_text(_(f'{user_info.username} has {user_karma} karma in this chat {period_suffix}.'))
 
 
-def karmas(_: Bot, update: Update):
+def karmas(bot: Bot, update: Update):
     """Shows the top 10 karmas in a given group.
 
     If the group doesn't have at least 10 users, shows as many as there are in
@@ -95,7 +95,7 @@ def karmas(_: Bot, update: Update):
     update.message.reply_text(response)
 
 
-def devil(_: Bot, update: Update):
+def devil(bot: Bot, update: Update):
     """Reply the user with some dumb text and the person with the lowest karma, the "devil".
 
     Args:
@@ -108,7 +108,7 @@ def devil(_: Bot, update: Update):
     update.message.reply_text(response)
 
 
-def saint(_: Bot, update: Update):
+def saint(bot: Bot, update: Update):
     """Reply the user with a message and the person with the highest karma, the "saint".
 
     Args:

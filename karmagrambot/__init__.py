@@ -2,6 +2,7 @@ import logging
 from dataclasses import dataclass
 from typing import Optional, Tuple
 import gettext
+from pathlib import Path
 
 import dataset
 from telegram import Message
@@ -12,7 +13,11 @@ from .config import DB_URI, TOKEN
 
 logging.basicConfig()
 
-_ = gettext.gettext
+locales_dir = Path(__file__).parent / 'locales'
+lang = gettext.translation('karmagram', localedir=str(locales_dir), languages=['pt_BR'], fallback=False)
+lang.install()
+_ = lang.gettext
+
 
 @dataclass(frozen=True)
 class MessageInfo:
@@ -134,7 +139,7 @@ def save_user(user, db):
     table.upsert(new_row, keys=['user_id'])
 
 
-def save(_, update):
+def save(bot, update):
     db = dataset.connect(DB_URI)
     save_message(update.message, db)
     save_user(update.message.from_user, db)
@@ -149,7 +154,7 @@ def track(chat_id, user_id, value, db):
         table.delete(chat_id=chat_id, user_id=user_id)
 
 
-def opt_in(_, update):
+def opt_in(bot, update):
     message = update.message
     chat_id = message.chat_id
     user_id = message.from_user.id
@@ -163,13 +168,11 @@ def opt_in(_, update):
     track(chat_id, user_id, True, db)
 
     message.reply_text(
-        _(u'You are now being tracked in this chat. '
-        'Worry not, the contents of your messages are not saved, '
-        'only their length \U00002713'
-    ))
+        _(u'You are now being tracked in this chat. Worry not, the contents of your messages are not saved, only their length ;)')
+    )
 
 
-def opt_out(_, update):
+def opt_out(bot, update):
     message = update.message
     chat_id = message.chat_id
     user_id = message.from_user.id
