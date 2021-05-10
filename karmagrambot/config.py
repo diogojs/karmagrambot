@@ -1,6 +1,19 @@
 import json
 from os import environ
 from pathlib import Path
+import gettext
+
+LOCALE = 'pt_BR'
+# LOCALE = 'en_US'
+
+
+def set_locale():
+    locales_dir = Path(__file__).parent / 'locales'
+    lang = gettext.translation(
+        'karmagram', localedir=str(locales_dir), languages=[LOCALE], fallback=False
+    )
+    lang.install()
+
 
 try:
     CONFIG_DIR = Path(environ['XDG_CONFIG_HOME'], __package__)

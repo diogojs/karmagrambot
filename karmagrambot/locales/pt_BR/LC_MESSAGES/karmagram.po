@@ -3,98 +3,108 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-09 16:54-0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2021-05-10 13:59-0300\n"
+"PO-Revision-Date: 2021-05-10 14:50-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
 
-#: commands.py:42 commands.py:82 util.py:61
+#: __init__.py:166
+msgid "You are already being tracked in this chat 😀"
+msgstr "Você já está sendo rastreado neste chat 😀"
+
+#: __init__.py:173
+msgid ""
+"You are now being tracked in this chat. Worry not, the contents of your "
+"messages are not saved, only their length ;)"
+msgstr ""
+"A partir de agora você está sendo rastreado neste chat. Não se preocupe, o "
+"conteúdo das suas mensagens não é salvo, apenas seu comprimento ;)"
+
+#: __init__.py:186
+msgid "You are not being tracked in this chat 🤔"
+msgstr "Você não está sendo rastreado neste chat 🤔"
+
+#: __init__.py:191
+msgid "You are no longer being tracked in this chat 🙋"
+msgstr "Você não está mais sendo rastreado neste chat  🙋"
+
+#: commands.py:47 commands.py:96 util.py:61
 msgid "m"
 msgstr "m"
 
-#: commands.py:44 commands.py:82 util.py:65
+#: commands.py:49 commands.py:98 util.py:65
 msgid "w"
 msgstr "s"
 
-#: commands.py:44 commands.py:82 util.py:65
+#: commands.py:49 commands.py:99 util.py:65
 msgid "week"
 msgstr "semana"
 
-#: commands.py:44 commands.py:82 util.py:63
+#: commands.py:49 commands.py:100 util.py:63
 msgid "y"
 msgstr "a"
 
-#: commands.py:44 commands.py:82 util.py:63
+#: commands.py:49 commands.py:101 util.py:63
 msgid "year"
 msgstr "ano"
 
-#: commands.py:44 commands.py:82
+#: commands.py:49 commands.py:102
 msgid "all"
 msgstr "todos"
 
-#: commands.py:44 commands.py:82
+#: commands.py:49 commands.py:103
 msgid "alltime"
 msgstr "todotempo"
 
-#: commands.py:59
+#: commands.py:64
 #, python-brace-format
 msgid "Could not find user named {username}"
 msgstr "Não encontrei o usuário {username}"
 
-#: commands.py:64
-#, python-brace-format
-msgid "(since {period})"
-msgstr "(desde {period})"
+#: commands.py:70
+msgid "(since {format_date(period, locale=LOCALE)})"
+msgstr "(desde {format_date(period, locale=LOCALE)})"
 
-#: commands.py:65
-#, python-brace-format
+#: commands.py:72
+msgid "(all time)"
+msgstr "(desde o início)"
+
+#: commands.py:76
 msgid ""
 "{user_info.username} has {user_karma} karma in this chat {period_suffix}."
-msgstr "{user_info.username} tem {user_karma} de karma neste chat {period_suffix}."
+msgstr ""
+"{user_info.username} tem {user_karma} de karma neste chat {period_suffix}."
 
-#: commands.py:82 util.py:61
+#: commands.py:97 util.py:61
 msgid "month"
 msgstr "mês"
 
-#: commands.py:84
+#: commands.py:106
 #, python-brace-format
 msgid "Period {requested_period} is not supported."
 msgstr "Período '{requested_period}' não suportado."
 
-#: commands.py:106
+#: commands.py:130
 #, python-brace-format
 msgid ""
 "{group_devil.name}, there's a special place in hell for you, see you there."
-msgstr "{group_devil.name}, há um lugar reservado para você no inferno. Te vejo lá!"
+msgstr ""
+"{group_devil.name}, há um lugar reservado para você no inferno. Te vejo lá."
 
-#: commands.py:119
+#: commands.py:145
 #, python-brace-format
 msgid ""
 "{group_saint.name}, apparently you're the nicest person here. I don't like "
 "you."
-msgstr "{group_saint.name}, aparentemente você é a pessoa mais querida por aqui. Não gosto de você."
-
-#: __init__.py:163
-msgid "You are already being tracked in this chat 😀"
-msgstr "Você já está sendo rastreado neste chat 😀"
-
-#: __init__.py:169
-msgid "You are now being tracked in this chat. Worry not, the contents of your messages are not saved, only their length ;)"
-msgstr "A partir de agora você está sendo rastreado neste chat. Não se preocupe, o conteúdo das suas mensagens não é salvo, apenas seu comprimento ;)"
-
-#: __init__.py:183
-msgid "You are not being tracked in this chat 🤔"
-msgstr "Você não está sendo rastreado neste chat 🤔"
-
-#: __init__.py:188
-msgid "You are no longer being tracked in this chat 🙋"
-msgstr "Você não está mais sendo rastreado neste chat  🙋"
+msgstr ""
+"{group_saint.name}, aparentemente você é a pessoa mais querida por aqui. Não "
+"gosto de você."

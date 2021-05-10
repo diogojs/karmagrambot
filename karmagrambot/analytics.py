@@ -4,8 +4,10 @@ from typing import Dict, List, Optional
 
 import dataset
 
-from .config import DB_URI
+from .config import DB_URI, set_locale
 from .types import DevilSaint, UserKarma
+
+set_locale()
 
 
 def average_message_length(user_id: int, chat_id: int) -> float:
@@ -19,17 +21,16 @@ def average_message_length(user_id: int, chat_id: int) -> float:
     """
 
     db = dataset.connect(DB_URI)
-    messages = list(db['messages'].find(
-        user_id=user_id,
-        chat_id=chat_id,
-        vote=None,
-        length={'not': None}
-    ))
+    messages = list(
+        db['messages'].find(
+            user_id=user_id, chat_id=chat_id, vote=None, length={'not': None}
+        )
+    )
 
     if not messages:
         return 0
 
-    return sum(m['length'] for m in messages) / len(messages)
+    return sum(int(m['length']) for m in messages) / len(messages)
 
 
 def get_karma(user_id: int, chat_id: int, period: Optional[date] = None) -> int:
@@ -46,16 +47,27 @@ def get_karma(user_id: int, chat_id: int, period: Optional[date] = None) -> int:
     db = dataset.connect(DB_URI)
 
     if timestamp is None:
-        result = db.query('select vote, count(1) as num from messages where vote is not null and chat_id = :chat_id and replied in (select message_id from messages where user_id = :user_id and chat_id = :chat_id) group by vote;', user_id=user_id, chat_id=chat_id)
+        result = db.query(
+            'select vote, count(1) as num from messages where vote is not null and chat_id = :chat_id and replied in (select message_id from messages where user_id = :user_id and chat_id = :chat_id) group by vote;',
+            user_id=user_id,
+            chat_id=chat_id,
+        )
     else:
-        result = db.query('select vote, count(1) as num from messages where vote is not null and chat_id = :chat_id and date(timestamp) > :timestamp and replied in (select message_id from messages where user_id = :user_id and chat_id = :chat_id) group by vote;', user_id=user_id, chat_id=chat_id, timestamp=timestamp)
+        result = db.query(
+            'select vote, count(1) as num from messages where vote is not null and chat_id = :chat_id and date(timestamp) > :timestamp and replied in (select message_id from messages where user_id = :user_id and chat_id = :chat_id) group by vote;',
+            user_id=user_id,
+            chat_id=chat_id,
+            timestamp=timestamp,
+        )
 
     votes = defaultdict(lambda: 0, (x.values() for x in result))
 
     return votes['+'] - votes['-']
 
 
-def get_top_n_karmas(chat_id: int, n: int, period: Optional[date] = None) -> List[UserKarma]:
+def get_top_n_karmas(
+    chat_id: int, n: int, period: Optional[date] = None
+) -> List[UserKarma]:
     """Get the top n karmas in a given group, if the doesn't have enough users, return the total amount.
     Args:
         chat_id: The id of the chat that we're interested in.

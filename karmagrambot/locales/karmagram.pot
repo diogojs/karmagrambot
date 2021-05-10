@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-09 19:11-0300\n"
+"POT-Creation-Date: 2021-05-10 13:59-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,86 +17,89 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: commands.py:42 commands.py:82 util.py:61
+#: __init__.py:166
+msgid "You are already being tracked in this chat 😀"
+msgstr ""
+
+#: __init__.py:173
+msgid ""
+"You are now being tracked in this chat. Worry not, the contents of your "
+"messages are not saved, only their length ;)"
+msgstr ""
+
+#: __init__.py:186
+msgid "You are not being tracked in this chat 🤔"
+msgstr ""
+
+#: __init__.py:191
+msgid "You are no longer being tracked in this chat 🙋"
+msgstr ""
+
+#: commands.py:47 commands.py:96 util.py:61
 msgid "m"
 msgstr ""
 
-#: commands.py:44 commands.py:82 util.py:65
+#: commands.py:49 commands.py:98 util.py:65
 msgid "w"
 msgstr ""
 
-#: commands.py:44 commands.py:82 util.py:65
+#: commands.py:49 commands.py:99 util.py:65
 msgid "week"
 msgstr ""
 
-#: commands.py:44 commands.py:82 util.py:63
+#: commands.py:49 commands.py:100 util.py:63
 msgid "y"
 msgstr ""
 
-#: commands.py:44 commands.py:82 util.py:63
+#: commands.py:49 commands.py:101 util.py:63
 msgid "year"
 msgstr ""
 
-#: commands.py:44 commands.py:82
+#: commands.py:49 commands.py:102
 msgid "all"
 msgstr ""
 
-#: commands.py:44 commands.py:82
+#: commands.py:49 commands.py:103
 msgid "alltime"
-msgstr ""
-
-#: commands.py:59
-#, python-brace-format
-msgid "Could not find user named {username}"
 msgstr ""
 
 #: commands.py:64
 #, python-brace-format
-msgid "(since {period})"
+msgid "Could not find user named {username}"
 msgstr ""
 
-#: commands.py:65
-#, python-brace-format
+#: commands.py:70
+msgid "(since {format_date(period, locale=LOCALE)})"
+msgstr ""
+
+#: commands.py:72
+msgid "(all time)"
+msgstr ""
+
+#: commands.py:76
 msgid ""
-"{user_info.username} has {user_karma} karma in this chat {period_suffix}."
+"{user_info.username} has {user_karma} karma in "
+"this chat {period_suffix}."
 msgstr ""
 
-#: commands.py:82 util.py:61
+#: commands.py:97 util.py:61
 msgid "month"
 msgstr ""
 
-#: commands.py:84
+#: commands.py:106
 #, python-brace-format
 msgid "Period {requested_period} is not supported."
 msgstr ""
 
-#: commands.py:106
+#: commands.py:130
 #, python-brace-format
 msgid ""
 "{group_devil.name}, there's a special place in hell for you, see you there."
 msgstr ""
 
-#: commands.py:119
+#: commands.py:145
 #, python-brace-format
 msgid ""
 "{group_saint.name}, apparently you're the nicest person here. I don't like "
 "you."
-msgstr ""
-
-#: __init__.py:165
-msgid "You are already being tracked in this chat 😀"
-msgstr ""
-
-#: __init__.py:171
-msgid ""
-"You are now being tracked in this chat. Worry not, the contents of your "
-"messages are not saved, only their length ✓"
-msgstr ""
-
-#: __init__.py:183
-msgid "You are not being tracked in this chat 🤔"
-msgstr ""
-
-#: __init__.py:188
-msgid "You are no longer being tracked in this chat 🙋"
 msgstr ""

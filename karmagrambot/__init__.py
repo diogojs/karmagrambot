@@ -1,22 +1,16 @@
 import logging
 from dataclasses import dataclass
 from typing import Optional, Tuple
-import gettext
-from pathlib import Path
 
 import dataset
 from telegram import Message
 from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
 
 from .commands import HANDLERS
-from .config import DB_URI, TOKEN
+from .config import DB_URI, TOKEN, set_locale
 
 logging.basicConfig()
-
-locales_dir = Path(__file__).parent / 'locales'
-lang = gettext.translation('karmagram', localedir=str(locales_dir), languages=['pt_BR'], fallback=False)
-lang.install()
-_ = lang.gettext
+set_locale()
 
 
 @dataclass(frozen=True)
@@ -74,6 +68,7 @@ def get_message_text(message: Message) -> Optional[str]:
 
     return None
 
+
 def get_message_info(message: Message) -> MessageInfo:
     replied = (
         message.reply_to_message.message_id
@@ -89,11 +84,7 @@ def get_message_info(message: Message) -> MessageInfo:
     length = len(text)
     vote = get_vote(text)
 
-    return MessageInfo(
-        replied=replied,
-        length=length,
-        vote=vote
-    )
+    return MessageInfo(replied=replied, length=length, vote=vote)
 
 
 def save_message(message, db):
@@ -168,7 +159,9 @@ def opt_in(bot, update):
     track(chat_id, user_id, True, db)
 
     message.reply_text(
-        _(u'You are now being tracked in this chat. Worry not, the contents of your messages are not saved, only their length ;)')
+        _(
+            u'You are now being tracked in this chat. Worry not, the contents of your messages are not saved, only their length ;)'
+        )
     )
 
 
@@ -186,6 +179,7 @@ def opt_out(bot, update):
     track(chat_id, user_id, False, db)
 
     message.reply_text(_(u'You are no longer being tracked in this chat \U0001F64B'))
+
 
 def run():
     updater = Updater(TOKEN)
